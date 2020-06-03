@@ -112,7 +112,60 @@ Size
 
 ... und viele weitere
 
+### Beispiel
+
+Projekt WindossFormsCoreBsp
+
+```C#
+public partial class Form1 : Form
+{
+    public Form1()
+    {
+        InitializeComponent();
+        InitControls();
+    }
+
+    private void InitControls()
+    {
+        labelAusgabe = new Label();
+        labelAusgabe.Location = new Point(0, 0);
+        labelAusgabe.Text = "ein Text";
+        labelAusgabe.AutoSize = true;
+        Controls.Add(labelAusgabe);
+        gibaus = new Button();
+        gibaus.Location = new Point(0, 40);
+        gibaus.Text = "gib was aus";
+        gibaus.AutoSize = true;
+        Controls.Add(gibaus);
+    }
+
+    private Label labelAusgabe;
+    private Button gibaus;
+}
+}
+```
+
+Controls werden
+
++ definiert
++ dem übergeordneten Control hinzugefügt und
++ einige Eigenschaften müssen unbedingt festgelegt werden.
+
 ### Koordinatensystem
+
+Das Koordinatensystem für ein Windows Form basiert auf Geräte Koordinaten und die grundlegende Maßeinheit ist die Geräteeinheit (in der Regel das Pixel). Die Punkte auf dem Bildschirm werden durch x-und y-Koordinatenpaare beschrieben. Die Position des Ursprungs variiert abhängig davon, ob Bildschirm- oder Client Koordinaten angegeben werden.
+
+**Bildschirmkoordinaten**
+
++ Der Ursprung befindet sich in der oberen linken Ecke des Bildschirms.
++ Die vollständige Position eines Fensters wird häufig durch eine Rectangle Struktur beschrieben: Koordinaten zweier Punkte, die die oberen linken und unteren rechten Ecke des Fensters definieren.
+
+**Clientkoordinaten**
+
++ Der Ursprung für Client Koordinaten ist die linke obere Ecke des Client Bereichs des Steuer Elements oder Formulars.
++ Die Abmessungen des Client Bereichs werden auch durch eine Rectangle Struktur beschrieben.
+
+Die Konvertierung der Koordinaten ist mit Hilfe der Methoden **PointToClient** und **PointToScreen** der Klasse **Control** möglich. Beispielsweise wird die MousePosition-in Bildschirmkoordinaten gemeldet und muss ggf. in Client Koordinaten konvertiert werden.
 
 ### Designer
 ![Designer-Box](BilderWF/image004.png)
@@ -131,8 +184,9 @@ Size
 Verwenden Sie .NET Core, wenn:
 
 + Es bestehen plattformübergreifende Anforderungen.
-+ Sie verwenden Docker-Container
-+ ...
++ Sie verwenden Docker-Container.
++ Sie sind auf skalierbare Hochleistungssysteme angewiesen.
++ Sie benötigen pro Anwendung verschiedene parallele .NET-Versionen.
 
 Verwenden Sie .NET Framework, wenn:
 
@@ -141,6 +195,8 @@ Verwenden Sie .NET Framework, wenn:
 + Ihre Anwendung verwendet eine Plattform, die .NET Core nicht unterstützt. Windows, macOS und Linux unterstützen .NET Core.
 
 Mehr dazu unter [https://docs.microsoft.com](https://docs.microsoft.com/de-de/dotnet/standard/choosing-core-framework-server)
+
+Achtung: .NET Core - Anwendungen verfügen unter Visual Studio 2019 nicht über Designer Sicht.
 
 ### Erzeugter Code
 
